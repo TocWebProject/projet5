@@ -18,7 +18,9 @@ class IsAdmin
         if(auth()->user()->is_admin == 1){
             return $next($request);
         }
-   
-        return redirect(‘home’)->with(‘error’,"You don't have admin access.");
+        
+        return redirect()->route('home')
+                ->with('error',"You don't have admin access.");
+        
     }
 }
