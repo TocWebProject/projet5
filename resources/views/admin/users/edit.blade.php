@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Modifier <div class="strong">{{ $user->name }}</div></div>
+                <div class="card-header">Modifier: <span class="font-weight-bold font-italic">{{ $user->name }}</span></div>
 
                 <div class="card-body">
                     <form action="{{ route('admin.users.update', $user) }}" method="POST">
@@ -44,6 +44,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">Modifier les informations</button>
+                        <a href="{{ route('admin.users.index') }}"><button class="btn btn-secondary mr-1">Retour</button></a>
                     </form>
                 </div>
             </div>
