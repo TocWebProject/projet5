@@ -65,7 +65,11 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $users = User::all();
+
+        return view('admin.users.edit',[
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -77,7 +81,20 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // Valeur pour la CheckBox
+        if($request->has('is_admin')){
+            // Box Checked
+            $user->is_admin = '1';
+        }else{
+            // Not Checked
+            $user->is_admin = '0';
+        }
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->save();
+
+        return redirect()->route('admin.users.index'); 
     }
 
     /**
@@ -88,6 +105,8 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('admin.users.index');
     }
 }

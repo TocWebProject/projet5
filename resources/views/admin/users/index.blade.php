@@ -31,7 +31,11 @@
                             @endif
                             <td>
                                 <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-primary">Éditer</button></a>
-                                <a href="{{ route('admin.users.destroy', $user->id) }}"><button class="btn btn-warning">Suprimer</button></a>
+                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
+                                        @csrf 
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-secondary">Supprimer</button>
+                                </form>
                             </td>
                             </tr>
                         @endforeach
