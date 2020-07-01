@@ -94,6 +94,12 @@ class UsersController extends Controller
 
         $user->save();
 
+        if ($user->save()){
+            $request->session()->flash('success', "Les informations de $user->name ont été mises à jour");
+        } else {
+            $request->session()->flash('error', 'Une erreur est survenue lors de la mise à jour');
+        }
+
         return redirect()->route('admin.users.index'); 
     }
 
