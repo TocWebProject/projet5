@@ -5,7 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Liste des utilisateurs</div>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    Liste des utilisateurs
+                    <a href="{{ route('admin.users.create') }}"><button class="btn-sm btn-primary mr-1">Créer un Utilisateur</button></a>
+                </div>
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -19,9 +22,9 @@
                             <th scope="col">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody>   
                             @foreach ($users as $user)
-                                <tr>
+                                <tr>    
                                 <th scope="row">{{ $user->id }}</th>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
