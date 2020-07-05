@@ -22,6 +22,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
 
+Route::get('/todo', 'TasksController@index')->name('todo');
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('is_admin')->group(function() {
     Route::resource('users', 'UsersController');
 }); 
