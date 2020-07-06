@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tasks;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
@@ -18,7 +19,9 @@ class TasksController extends Controller
      */
     public function index()
     {
-        return view('todo');
+        $tasks = Tasks::all();
+        return response()->json($tasks);
+        //return view('todo');
     }
 
     /**
