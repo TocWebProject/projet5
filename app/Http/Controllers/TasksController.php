@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tasks;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {
@@ -19,9 +20,12 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = Tasks::all();
-        return response()->json($tasks);
-        //return view('todo');
+        $id = Auth::id();
+        $userTasks = Tasks::where('user_id', $id)->get();
+        
+        // return response()->json($userTasks);
+        return view('todo')->with('tasks', $userTasks);
+        
     }
 
     /**
