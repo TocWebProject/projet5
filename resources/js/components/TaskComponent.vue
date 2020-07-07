@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <ul class="list-group">
+        <add-task-component @task-added="refresh"></add-task-component>
+        <ul class="list-group mt-2">
             <li class="list-group-item" v-for="task in tasks.data" :key="task.id">
                 <p>{{ task.name }}</p>
             </li>
@@ -33,6 +34,10 @@
                     this.tasks = response.data;
                 });
             },
+            
+            refresh(tasks){
+                this.tasks = tasks.data
+            }
         },
 
         mounted() {

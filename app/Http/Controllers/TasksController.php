@@ -22,7 +22,7 @@ class TasksController extends Controller
     {
         // On récupère l'id de l'utilisateur identifié et on vas chercher dans le Model Tasks ses tâches grâce a son Id.
         $id = Auth::id();
-        $tasks = Tasks::where('user_id', $id)->paginate(3);
+        $tasks = Tasks::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(3);
         
         return response()->json($tasks);
     }
@@ -45,7 +45,14 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        
+        $task = Tasks::create($data);
+        
+        if($task){
+            return $this->refresh();
+        }
     }
 
     /**
@@ -91,5 +98,13 @@ class TasksController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function refresh(){
+
+        $id = Auth::id();
+        $tasks = Tasks::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(3);
+        
+        return response()->json($tasks);
     }
 }

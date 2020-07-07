@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('task-component', require('./components/TaskComponent.vue').default);
+Vue.component('add-task-component', require('./components/AddTaskComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

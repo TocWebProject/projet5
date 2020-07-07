@@ -34,6 +34,7 @@ Route::get('/todo-list', function () {
 })->name('todo-list');
 
 Route::get('/todo', 'TasksController@index')->name('todo');
+Route::post('/todo', 'TasksController@store')->name('todo');
 
 // CRUD Users for Admin
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('is_admin')->group(function() {
