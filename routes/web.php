@@ -19,11 +19,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// HOME
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
 
+// TODO
+Route::get('/todo-list', function () {
+    if(Auth::user()){
+        return view('todo');
+    }
+    else{
+        return view('auth.login');
+    }
+})->name('todo-list');
+
 Route::get('/todo', 'TasksController@index')->name('todo');
 
+// CRUD Users for Admin
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('is_admin')->group(function() {
     Route::resource('users', 'UsersController');
 }); 

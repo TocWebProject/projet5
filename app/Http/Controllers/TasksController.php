@@ -20,12 +20,11 @@ class TasksController extends Controller
      */
     public function index()
     {
+        // On récupère l'id de l'utilisateur identifié et on vas chercher dans le Model Tasks ses tâches grâce a son Id.
         $id = Auth::id();
-        $userTasks = Tasks::where('user_id', $id)->get();
+        $tasks = Tasks::where('user_id', $id)->get();
         
-        // return response()->json($userTasks);
-        return view('todo')->with('tasks', $userTasks);
-        
+        return response()->json($tasks);
     }
 
     /**

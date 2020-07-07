@@ -50,7 +50,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('todo') }}">Liste des Tâches</a> 
+                                <a class="nav-link" href="{{ route('todo-list') }}">Liste des Tâches</a> 
                             </li>
                         @can('manage-users')
                             <li class="nav-item">
