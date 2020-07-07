@@ -74,7 +74,9 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Tasks::find($id);
+
+        return response()->json($task);
     }
 
     /**
@@ -86,7 +88,13 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Tasks::find($id);
+        $task->name = request('name');
+        $task->save();
+
+        if($task){
+            return $this->refresh();
+        }
     }
 
     /**
@@ -97,7 +105,13 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Tasks::find($id);
+
+        if ($task->delete()){
+            return $this->refresh();
+        } else {
+            return response()->json(['error' => 'Destroy method has failed'], 425);
+        }
     }
 
     private function refresh(){

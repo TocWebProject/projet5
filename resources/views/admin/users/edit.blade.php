@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input" name="is_admin" 
-                            @if ($user->is_admin == 1)) checked @endif >
+                            @if ($user->is_admin == 1) checked @endif >
                             <label for="{{ $user->is_admin }}" class="form-check-label">Administrateur</label>
                         </div>
 
