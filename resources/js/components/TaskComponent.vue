@@ -1,6 +1,13 @@
 <template>
     <div class="container">
-        <add-task-component @task-added="refresh"></add-task-component>
+        <div class="form-row">
+            <div class="col-row">
+                <add-task-component @task-added="refresh"></add-task-component>
+            </div>
+            <div class="col-row">
+                <input type="text" class="form-control my-3" @keyup="searchTask" v-model="searchQ" placeholder="Rechercher une tâche">
+            </div>
+        </div>    
         <ul class="list-group mt-2">
             <li class="list-group-item" v-for="task in tasks.data" :key="task.id">
                 <div class="d-flex justify-content-between align-self-center">
@@ -25,6 +32,7 @@
             return{
                 tasks: {},
                 taskToEdit:'',
+                searchQ:''
             }
         },
 
@@ -56,6 +64,20 @@
                 axios.delete('http://journal-de-bord.test/tasks/' + id)
                     .then(response => this.tasks = response.data)
                     .catch(error => console.log(error));
+            },
+
+            searchTask(){
+                if(this.searchQ.length > 3 ){
+                  axios.get('http://journal-de-bord.test/todo/' + this.searchQ)
+                    .then(response => this.tasks = response.data)  
+                    .catch(error => console.log(error));
+                }else{
+                    axios.get('http://journal-de-bord.test/todo')
+                        //promesse attend les data de la bdd
+                        // .response(response => console.log(response))
+                        .then(response => this.tasks = response.data)
+                        .catch(error => console.log(error));                    
+                }
             },
 
             refresh(tasks){

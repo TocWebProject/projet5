@@ -20,11 +20,14 @@ class TasksController extends Controller
      */
     public function index()
     {
-        // On récupère l'id de l'utilisateur identifié et on vas chercher dans le Model Tasks ses tâches grâce a son Id.
-        $id = Auth::id();
-        $tasks = Tasks::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(3);
-        
-        return response()->json($tasks);
+        if(request('searchQ') !== null){
+            // On récupère l'id de l'utilisateur identifié et on vas chercher dans le Model Tasks ses tâches grâce a son Id.
+            $id = Auth::id();
+            $tasks['data'] = Tasks::where('user_id', $id)->where('name', 'like', '%' . request('searchQ') . '%')->get();
+            return response()->json($tasks);
+         } else{
+             return $this->refresh();
+         }
     }
 
     /**

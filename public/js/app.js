@@ -2057,11 +2057,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       tasks: {},
-      taskToEdit: ''
+      taskToEdit: '',
+      searchQ: ''
     };
   },
   created: function created() {
@@ -2103,6 +2111,25 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
+    },
+    searchTask: function searchTask() {
+      var _this5 = this;
+
+      if (this.searchQ.length > 3) {
+        axios.get('http://journal-de-bord.test/todo/' + this.searchQ).then(function (response) {
+          return _this5.tasks = response.data;
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      } else {
+        axios.get('http://journal-de-bord.test/todo') //promesse attend les data de la bdd
+        // .response(response => console.log(response))
+        .then(function (response) {
+          return _this5.tasks = response.data;
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      }
     },
     refresh: function refresh(tasks) {
       this.tasks = tasks.data;
@@ -38524,7 +38551,39 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("add-task-component", { on: { "task-added": _vm.refresh } }),
+      _c("div", { staticClass: "form-row" }, [
+        _c(
+          "div",
+          { staticClass: "col-row" },
+          [_c("add-task-component", { on: { "task-added": _vm.refresh } })],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-row" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchQ,
+                expression: "searchQ"
+              }
+            ],
+            staticClass: "form-control my-3",
+            attrs: { type: "text", placeholder: "Rechercher une tâche" },
+            domProps: { value: _vm.searchQ },
+            on: {
+              keyup: _vm.searchTask,
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.searchQ = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "ul",
