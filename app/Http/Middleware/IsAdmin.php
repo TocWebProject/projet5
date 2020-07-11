@@ -20,7 +20,7 @@ class IsAdmin
         }
         
         return redirect()->route('home')
-                ->with('error',"You don't have admin access.");
+                ->with('error',"Vous n'avez pas accès à l'administration.");
         
     }
 }

@@ -19,7 +19,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('task-component', require('./components/TaskComponent.vue').default);
+Vue.component('add-task-component', require('./components/AddTaskComponent.vue').default);
+Vue.component('modify-task-component', require('./components/ModifyTaskComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
