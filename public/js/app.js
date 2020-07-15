@@ -2115,7 +2115,7 @@ __webpack_require__.r(__webpack_exports__);
     searchTask: function searchTask() {
       var _this5 = this;
 
-      if (this.searchQ.length > 3) {
+      if (this.searchQ.length > 2) {
         axios.get('http://journal-de-bord.test/todo/' + this.searchQ).then(function (response) {
           return _this5.tasks = response.data;
         })["catch"](function (error) {

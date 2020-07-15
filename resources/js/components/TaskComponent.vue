@@ -67,7 +67,7 @@
             },
 
             searchTask(){
-                if(this.searchQ.length > 3 ){
+                if(this.searchQ.length > 2 ){
                   axios.get('http://journal-de-bord.test/todo/' + this.searchQ)
                     .then(response => this.tasks = response.data)  
                     .catch(error => console.log(error));

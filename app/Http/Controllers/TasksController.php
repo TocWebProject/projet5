@@ -117,10 +117,11 @@ class TasksController extends Controller
         }
     }
 
-    private function refresh(){
-
+    private function refresh()
+    {
+        $nombreDeTachesParPage = 4; 
         $id = Auth::id();
-        $tasks = Tasks::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate(3);
+        $tasks = Tasks::where('user_id', $id)->orderBy('created_at', 'DESC')->paginate($nombreDeTachesParPage);
         
         return response()->json($tasks);
     }

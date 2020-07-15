@@ -23,16 +23,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
 
-// TODO
-Route::get('/todo-list', function () {
-    if(Auth::user()){
-        return view('todo');
-    }
-    else{
-        return view('auth.login');
-    }
-})->name('todo-list');
+// TODO-LIST View.
+Route::get ('/todo-list',function () {
+    return view('todo');
+})->name('todo-list')->middleware('auth');
 
+// TODO-LIST Request.
 Route::get('/todo/{searchQ?}', 'TasksController@index')->name('todo');
 Route::post('/todo', 'TasksController@store')->name('todo');
 Route::get('/tasks/modify/{id}', 'TasksController@edit');
