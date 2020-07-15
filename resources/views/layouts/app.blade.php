@@ -50,6 +50,9 @@
                             @endif
                         @else
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/home') }}">Accueil</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('todo-list') }}">Liste des Tâches</a> 
                             </li>
                         @can('manage-users')
