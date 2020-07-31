@@ -3,7 +3,8 @@
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#addtask">
-        Ajouter une tâche
+            <i class="far fa-plus-square"></i>
+            Ajouter une tâche
         </button>
 
         <!-- Modal -->

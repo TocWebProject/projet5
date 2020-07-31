@@ -11,12 +11,15 @@
         <ul class="list-group mt-2">
             <li class="list-group-item" v-for="task in tasks.data" :key="task.id">
                 <div class="d-flex justify-content-between align-self-center">
-                    <a href="#" class="align-self-center">{{task.name}}</a>
+                    <a href="#" class="align-self-center mr-5">{{task.name}}</a>
                     <div class="d-flex justify-content-arround">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" @click="getTask(task.id)">
-                            Modifier
-                        </button>
-                        <button type="button" class="btn btn-secondary ml-1" @click="deleteTask(task.id)">Supprimer</button>                        
+                        <div class="btn-group-vertical ml-2">
+                            <button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#editModal" @click="getTask(task.id)">
+                                <i class="far fa-edit mr-1"></i>
+                                Modifier
+                            </button>
+                            <button type="button" class="btn-sm btn-secondary mt-1" @click="deleteTask(task.id)"><i class="far fa-trash-alt mr-1"></i>Supprimer</button>    
+                        </div>                        
                     </div>
                 </div>
             </li>

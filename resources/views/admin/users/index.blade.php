@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     Liste des utilisateurs
-                    <a href="{{ route('admin.users.create') }}"><button class="btn-sm btn-primary mr-1">Créer un Utilisateur</button></a>
+                    <a href="{{ route('admin.users.create') }}"><button class="btn-sm btn-primary mr-1"><i class="fas fa-user-plus mr-1"></i>Créer un Utilisateur</button></a>
                 </div>
 
                 <div class="card-body">
@@ -34,11 +34,11 @@
                                 <td>Utilisateur</td>
                                 @endif
                                 <td class="d-flex align-items">
-                                    <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-primary mr-1">Éditer</button></a>
+                                    <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn-sm btn-primary mr-1"><i class="far fa-edit mr-1"></i>Éditer</button></a>
                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
                                             @csrf 
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-secondary">Supprimer</button>
+                                            <button type="submit" class="btn-sm btn-secondary"><i class="far fa-trash-alt mr-1"></i>Supprimer</button>
                                     </form>
                                 </td>
                                 </tr>

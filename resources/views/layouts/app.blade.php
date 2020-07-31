@@ -50,18 +50,19 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/home') }}">Accueil</a>
+                                <a class="nav-link" href="{{ url('/home') }}"><i class="fas fa-home mr-1"></i>Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('todo-list') }}">Liste des Tâches</a> 
+                                <a class="nav-link" href="{{ route('todo-list') }}"><i class="fas fa-list-ul mr-1"></i>Liste des Tâches</a> 
                             </li>
                         @can('manage-users')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.users.index') }}">Liste des utilisateurs</a> 
+                                <a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fa fa-users mr-1" aria-hidden="true"></i>Liste des utilisateurs</a> 
                             </li>
                         @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fa fa-user" aria-hidden="true"></i>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 

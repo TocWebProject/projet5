@@ -44,8 +44,9 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">Modifier les informations</button>
-                        <a href="{{ route('admin.users.index') }}"><button class="btn btn-secondary mr-1">Retour</button></a>
+                        
                     </form>
+                    <a href="{{ route('admin.users.index') }}"><button class="btn-sm btn-secondary mt-1">Annuler</button></a>
                 </div>
             </div>
         </div>
