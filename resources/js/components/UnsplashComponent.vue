@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="input-group">
                     <input
-                        v-model="topic"
+                        v-model="unsplashQuery"
                         v-on:keyup.enter="onEnter"
                         type="text"
                         label="search term"
@@ -44,16 +44,16 @@
 
         data: () => ({
             images: [],
-            topic: "Web"
+            unsplashQuery: localStorage.unsplashQuery,
         }),
 
 
         methods: {
-            searchUnsplash(topic) {
+            searchUnsplash(unsplashQuery) {
                 this.images = [];
                 axios
                 .get(
-                `https://api.unsplash.com/search/photos?query=${this.topic}&per_page=21`,
+                `https://api.unsplash.com/search/photos?query=${this.unsplashQuery}&per_page=21`,
                 {
                     headers: {
                     Authorization:
@@ -71,13 +71,24 @@
             },
 
             onEnter: function(){
-               this.searchUnsplash(this.topic) 
+               this.searchUnsplash(this.unsplashQuery) 
             },
                 
         },
 
+        mounted() {
+        if (localStorage.unsplashQuery) {
+            this.unsplashQuery = localStorage.unsplashQuery;
+            }
+        },
+        watch: {
+            unsplashQuery(newUnsplashSearch) {
+            localStorage.unsplashQuery = newUnsplashSearch;
+            }
+        },
+
         beforeMount(){
-            this.searchUnsplash(this.topic)
+            this.searchUnsplash(this.unsplashQuery)
          },
 
     
