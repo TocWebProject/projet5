@@ -6491,6 +6491,108 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/OpenWeatherMapComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/OpenWeatherMapComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'weather',
+  data: function data() {
+    return {
+      api_key: '9acc0fa70a651d74c716faca6c3bc992',
+      url_base: 'https://api.openweathermap.org/data/2.5/',
+      cityQuery: localStorage.cityQuery,
+      weather: {}
+    };
+  },
+  methods: {
+    fetchWeather: function fetchWeather() {
+      fetch("".concat(this.url_base, "weather?q=").concat(this.cityQuery, "&units=metric&APPID=").concat(this.api_key, "&lang=fr")).then(function (response) {
+        return response.json();
+      }).then(this.setResults);
+    },
+    setResults: function setResults(results) {
+      this.weather = results;
+    },
+    dateBuilder: function dateBuilder() {
+      var d = new Date();
+      var months = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"];
+      var days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+      var day = days[d.getDay()];
+      var date = d.getDate();
+      var month = months[d.getMonth()];
+      var year = d.getFullYear();
+      return "".concat(day, " ").concat(date, " ").concat(month, " ").concat(year);
+    }
+  },
+  mounted: function mounted() {
+    if (localStorage.cityQuery) {
+      this.cityQuery = localStorage.cityQuery;
+    }
+  },
+  watch: {
+    cityQuery: function cityQuery(newCity) {
+      localStorage.cityQuery = newCity;
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.fetchWeather(this.cityQuery);
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TaskComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TaskComponent.vue?vue&type=script&lang=js& ***!
@@ -6500,7 +6602,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -6662,15 +6763,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       images: [],
-      topic: "Web"
+      unsplashQuery: localStorage.unsplashQuery
     };
   },
   methods: {
-    searchUnsplash: function searchUnsplash(topic) {
+    searchUnsplash: function searchUnsplash(unsplashQuery) {
       var _this = this;
 
       this.images = [];
-      axios.get("https://api.unsplash.com/search/photos?query=".concat(this.topic, "&per_page=21"), {
+      axios.get("https://api.unsplash.com/search/photos?query=".concat(this.unsplashQuery, "&per_page=21"), {
         headers: {
           Authorization: "Client-ID YXdpxoIybZ6W2NPqmou2ciz_pBaEEKef1yQ2zh-mGtA",
           "Accept-Version": "v1"
@@ -6682,11 +6783,21 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onEnter: function onEnter() {
-      this.searchUnsplash(this.topic);
+      this.searchUnsplash(this.unsplashQuery);
+    }
+  },
+  mounted: function mounted() {
+    if (localStorage.unsplashQuery) {
+      this.unsplashQuery = localStorage.unsplashQuery;
+    }
+  },
+  watch: {
+    unsplashQuery: function unsplashQuery(newUnsplashSearch) {
+      localStorage.unsplashQuery = newUnsplashSearch;
     }
   },
   beforeMount: function beforeMount() {
-    this.searchUnsplash(this.topic);
+    this.searchUnsplash(this.unsplashQuery);
   }
 });
 
@@ -22726,7 +22837,7 @@ var LaravelVuePagination_component = normalizeComponent(
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.19';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -26433,8 +26544,21 @@ var LaravelVuePagination_component = normalizeComponent(
      * @returns {Array} Returns the new sorted array.
      */
     function baseOrderBy(collection, iteratees, orders) {
+      if (iteratees.length) {
+        iteratees = arrayMap(iteratees, function(iteratee) {
+          if (isArray(iteratee)) {
+            return function(value) {
+              return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
+            }
+          }
+          return iteratee;
+        });
+      } else {
+        iteratees = [identity];
+      }
+
       var index = -1;
-      iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(getIteratee()));
+      iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
 
       var result = baseMap(collection, function(value, key, collection) {
         var criteria = arrayMap(iteratees, function(iteratee) {
@@ -26691,6 +26815,10 @@ var LaravelVuePagination_component = normalizeComponent(
         var key = toKey(path[index]),
             newValue = value;
 
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+          return object;
+        }
+
         if (index != lastIndex) {
           var objValue = nested[key];
           newValue = customizer ? customizer(objValue, key, nested) : undefined;
@@ -26843,11 +26971,14 @@ var LaravelVuePagination_component = normalizeComponent(
      *  into `array`.
      */
     function baseSortedIndexBy(array, value, iteratee, retHighest) {
-      value = iteratee(value);
-
       var low = 0,
-          high = array == null ? 0 : array.length,
-          valIsNaN = value !== value,
+          high = array == null ? 0 : array.length;
+      if (high === 0) {
+        return 0;
+      }
+
+      value = iteratee(value);
+      var valIsNaN = value !== value,
           valIsNull = value === null,
           valIsSymbol = isSymbol(value),
           valIsUndefined = value === undefined;
@@ -28332,10 +28463,11 @@ var LaravelVuePagination_component = normalizeComponent(
       if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
         return false;
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(array);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var arrStacked = stack.get(array);
+      var othStacked = stack.get(other);
+      if (arrStacked && othStacked) {
+        return arrStacked == other && othStacked == array;
       }
       var index = -1,
           result = true,
@@ -28497,10 +28629,11 @@ var LaravelVuePagination_component = normalizeComponent(
           return false;
         }
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(object);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var objStacked = stack.get(object);
+      var othStacked = stack.get(other);
+      if (objStacked && othStacked) {
+        return objStacked == other && othStacked == object;
       }
       var result = true;
       stack.set(object, other);
@@ -31881,6 +32014,10 @@ var LaravelVuePagination_component = normalizeComponent(
      * // The `_.property` iteratee shorthand.
      * _.filter(users, 'active');
      * // => objects for ['barney']
+     *
+     * // Combining several predicates using `_.overEvery` or `_.overSome`.
+     * _.filter(users, _.overSome([{ 'age': 36 }, ['age', 40]]));
+     * // => objects for ['fred', 'barney']
      */
     function filter(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
@@ -32630,15 +32767,15 @@ var LaravelVuePagination_component = normalizeComponent(
      * var users = [
      *   { 'user': 'fred',   'age': 48 },
      *   { 'user': 'barney', 'age': 36 },
-     *   { 'user': 'fred',   'age': 40 },
+     *   { 'user': 'fred',   'age': 30 },
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
      * _.sortBy(users, [function(o) { return o.user; }]);
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 30]]
      *
      * _.sortBy(users, ['user', 'age']);
-     * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
+     * // => objects for [['barney', 34], ['barney', 36], ['fred', 30], ['fred', 48]]
      */
     var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
@@ -37513,11 +37650,11 @@ var LaravelVuePagination_component = normalizeComponent(
 
       // Use a sourceURL for easier debugging.
       // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
+      // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
+      // and escape the comment, thus injecting code that gets evaled.
       var sourceURL = '//# sourceURL=' +
         (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+          ? (options.sourceURL + '').replace(/\s/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -37550,8 +37687,6 @@ var LaravelVuePagination_component = normalizeComponent(
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
       var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
@@ -38258,6 +38393,9 @@ var LaravelVuePagination_component = normalizeComponent(
      * values against any array or object value, respectively. See `_.isEqual`
      * for a list of supported value comparisons.
      *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
+     *
      * @static
      * @memberOf _
      * @since 3.0.0
@@ -38273,6 +38411,10 @@ var LaravelVuePagination_component = normalizeComponent(
      *
      * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
      * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
+     *
+     * // Checking for several possible values
+     * _.filter(users, _.overSome([_.matches({ 'a': 1 }), _.matches({ 'a': 4 })]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, CLONE_DEEP_FLAG));
@@ -38286,6 +38428,9 @@ var LaravelVuePagination_component = normalizeComponent(
      * **Note:** Partial comparisons will match empty array and empty object
      * `srcValue` values against any array or object value, respectively. See
      * `_.isEqual` for a list of supported value comparisons.
+     *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
      *
      * @static
      * @memberOf _
@@ -38303,6 +38448,10 @@ var LaravelVuePagination_component = normalizeComponent(
      *
      * _.find(objects, _.matchesProperty('a', 4));
      * // => { 'a': 4, 'b': 5, 'c': 6 }
+     *
+     * // Checking for several possible values
+     * _.filter(users, _.overSome([_.matchesProperty('a', 1), _.matchesProperty('a', 4)]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
@@ -38526,6 +38675,10 @@ var LaravelVuePagination_component = normalizeComponent(
      * Creates a function that checks if **all** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -38552,6 +38705,10 @@ var LaravelVuePagination_component = normalizeComponent(
      * Creates a function that checks if **any** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -38571,6 +38728,9 @@ var LaravelVuePagination_component = normalizeComponent(
      *
      * func(NaN);
      * // => false
+     *
+     * var matchesFunc = _.overSome([{ 'a': 1 }, { 'a': 2 }])
+     * var matchesPropertyFunc = _.overSome([['a', 1], ['a', 2]])
      */
     var overSome = createOver(arraySome);
 
@@ -43736,6 +43896,157 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/OpenWeatherMapComponent.vue?vue&type=template&id=4f7fb850&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/OpenWeatherMapComponent.vue?vue&type=template&id=4f7fb850& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-4", attrs: { id: "weather" } }, [
+    _c("div", { staticClass: "card mb-3" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("Météo")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body align-middle text-center" }, [
+        typeof _vm.weather.main != "undefined"
+          ? _c("div", { staticClass: "weather-wrap" }, [
+              _c("div", { staticClass: "location-box" }, [
+                _c("div", { staticClass: "location" }, [
+                  _vm._v(
+                    _vm._s(_vm.weather.name) +
+                      ", " +
+                      _vm._s(_vm.weather.sys.country)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "date" }, [
+                  _vm._v(_vm._s(_vm.dateBuilder()))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "weather-box" }, [
+                _c("div", { staticClass: "icon" }, [
+                  _c("img", {
+                    attrs: {
+                      src:
+                        "http://openweathermap.org/img/wn/" +
+                        _vm.weather.weather[0].icon +
+                        "@2x.png",
+                      alt: "weather icon"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex justify-content-center" }, [
+                  _c("p", { staticClass: "temp mr-3" }, [
+                    _vm._v(_vm._s(Math.round(_vm.weather.main.temp)) + "°c")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "weather" }, [
+                    _vm._v(_vm._s(_vm.weather.weather[0].description))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex justify-content-center" }, [
+                  _c("p", { staticClass: "temp-min mr-3" }, [
+                    _vm._v(
+                      "Min: " +
+                        _vm._s(Math.round(_vm.weather.main.temp_min)) +
+                        "°c"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "temp.max" }, [
+                    _vm._v(
+                      "Max: " +
+                        _vm._s(Math.round(_vm.weather.main.temp_max)) +
+                        "°c"
+                    )
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "button-wrapper d-flex justify-content-center" },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "input-group text-center" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cityQuery,
+                      expression: "cityQuery"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Votre ville",
+                    "aria-label": "Recipient's search weather"
+                  },
+                  domProps: { value: _vm.cityQuery },
+                  on: {
+                    keyup: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.fetchWeather($event)
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.cityQuery = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-primary",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.fetchWeather("")
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-search" })]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TaskComponent.vue?vue&type=template&id=50814c9d&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TaskComponent.vue?vue&type=template&id=50814c9d& ***!
@@ -43805,7 +44116,7 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass: "align-self-center mr-5",
+                      staticClass: "align-self-center text-wrap mr-3",
                       attrs: { href: "#" }
                     },
                     [_vm._v(_vm._s(task.name))]
@@ -43816,11 +44127,12 @@ var render = function() {
                       _c(
                         "button",
                         {
-                          staticClass: "btn-sm btn-primary",
+                          staticClass: "btn-sm btn-primary m-1",
                           attrs: {
                             type: "button",
                             "data-toggle": "modal",
-                            "data-target": "#editModal"
+                            "data-target": "#editModal",
+                            title: "Modifier"
                           },
                           on: {
                             click: function($event) {
@@ -43828,29 +44140,21 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _c("i", { staticClass: "far fa-edit mr-1" }),
-                          _vm._v(
-                            "\n                            Modifier\n                        "
-                          )
-                        ]
+                        [_c("i", { staticClass: "far fa-edit m-1" })]
                       ),
                       _vm._v(" "),
                       _c(
                         "button",
                         {
-                          staticClass: "btn-sm btn-secondary mt-1",
-                          attrs: { type: "button" },
+                          staticClass: "btn-sm btn-secondary m-1",
+                          attrs: { type: "button", title: "Supprimer" },
                           on: {
                             click: function($event) {
                               return _vm.deleteTask(task.id)
                             }
                           }
                         },
-                        [
-                          _c("i", { staticClass: "far fa-trash-alt mr-1" }),
-                          _vm._v("Supprimer")
-                        ]
+                        [_c("i", { staticClass: "far fa-trash-alt m-1" })]
                       )
                     ])
                   ])
@@ -43911,8 +44215,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.topic,
-                expression: "topic"
+                value: _vm.unsplashQuery,
+                expression: "unsplashQuery"
               }
             ],
             staticClass: "form-control",
@@ -43923,7 +44227,7 @@ var render = function() {
               "aria-label": "Recipient's topic",
               "aria-describedby": "basic-addon2"
             },
-            domProps: { value: _vm.topic },
+            domProps: { value: _vm.unsplashQuery },
             on: {
               keyup: function($event) {
                 if (
@@ -43938,7 +44242,7 @@ var render = function() {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.topic = $event.target.value
+                _vm.unsplashQuery = $event.target.value
               }
             }
           }),
@@ -56195,6 +56499,7 @@ Vue.component('task-component', __webpack_require__(/*! ./components/TaskCompone
 Vue.component('add-task-component', __webpack_require__(/*! ./components/AddTaskComponent.vue */ "./resources/js/components/AddTaskComponent.vue")["default"]);
 Vue.component('modify-task-component', __webpack_require__(/*! ./components/ModifyTaskComponent.vue */ "./resources/js/components/ModifyTaskComponent.vue")["default"]);
 Vue.component('unsplash-api', __webpack_require__(/*! ./components/UnsplashComponent.vue */ "./resources/js/components/UnsplashComponent.vue")["default"]);
+Vue.component('openweathermap-api', __webpack_require__(/*! ./components/OpenWeatherMapComponent.vue */ "./resources/js/components/OpenWeatherMapComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -56385,6 +56690,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModifyTaskComponent_vue_vue_type_template_id_5415a143___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModifyTaskComponent_vue_vue_type_template_id_5415a143___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/OpenWeatherMapComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/OpenWeatherMapComponent.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _OpenWeatherMapComponent_vue_vue_type_template_id_4f7fb850___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OpenWeatherMapComponent.vue?vue&type=template&id=4f7fb850& */ "./resources/js/components/OpenWeatherMapComponent.vue?vue&type=template&id=4f7fb850&");
+/* harmony import */ var _OpenWeatherMapComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OpenWeatherMapComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/OpenWeatherMapComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _OpenWeatherMapComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _OpenWeatherMapComponent_vue_vue_type_template_id_4f7fb850___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _OpenWeatherMapComponent_vue_vue_type_template_id_4f7fb850___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/OpenWeatherMapComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/OpenWeatherMapComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/OpenWeatherMapComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OpenWeatherMapComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./OpenWeatherMapComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/OpenWeatherMapComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OpenWeatherMapComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/OpenWeatherMapComponent.vue?vue&type=template&id=4f7fb850&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/OpenWeatherMapComponent.vue?vue&type=template&id=4f7fb850& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OpenWeatherMapComponent_vue_vue_type_template_id_4f7fb850___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./OpenWeatherMapComponent.vue?vue&type=template&id=4f7fb850& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/OpenWeatherMapComponent.vue?vue&type=template&id=4f7fb850&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OpenWeatherMapComponent_vue_vue_type_template_id_4f7fb850___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OpenWeatherMapComponent_vue_vue_type_template_id_4f7fb850___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

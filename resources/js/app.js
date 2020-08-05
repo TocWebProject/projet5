@@ -25,6 +25,7 @@ Vue.component('task-component', require('./components/TaskComponent.vue').defaul
 Vue.component('add-task-component', require('./components/AddTaskComponent.vue').default);
 Vue.component('modify-task-component', require('./components/ModifyTaskComponent.vue').default);
 Vue.component('unsplash-api', require('./components/UnsplashComponent.vue').default);
+Vue.component('openweathermap-api', require('./components/OpenWeatherMapComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
