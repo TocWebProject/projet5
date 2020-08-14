@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
 </head>
 <body>
     <div id="app">
@@ -55,7 +55,10 @@
                                 <a class="nav-link" href="{{ url('/home') }}"><i class="fas fa-home mr-1"></i>Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('todo-list') }}"><i class="fas fa-list-ul mr-1"></i>Liste des Tâches</a> 
+                                <a class="nav-link" href="{{ route('todo-list') }}"><i class="fas fa-list-ul mr-1"></i>Tâches</a> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('calendar') }}"><i class="fas fa-calendar-alt mr-1"></i>Calendrier</a> 
                             </li>
                         @can('manage-users')
                             <li class="nav-item">

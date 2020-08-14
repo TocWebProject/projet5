@@ -35,6 +35,11 @@ Route::get('/tasks/modify/{id}', 'TasksController@edit');
 Route::patch('/tasks/modify/{id}', 'TasksController@update');
 Route::delete('/tasks/{id}', 'TasksController@destroy');
 
+// Calendar View & Request
+Route::get ('/calendar',function () {
+    return view('calendar');
+})->name('calendar')->middleware('auth');
+
 // CRUD Users for Admin
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('is_admin')->group(function() {
     Route::resource('users', 'UsersController');

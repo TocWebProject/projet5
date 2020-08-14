@@ -26,6 +26,7 @@ Vue.component('add-task-component', require('./components/AddTaskComponent.vue')
 Vue.component('modify-task-component', require('./components/ModifyTaskComponent.vue').default);
 Vue.component('unsplash-api', require('./components/UnsplashComponent.vue').default);
 Vue.component('openweathermap-api', require('./components/OpenWeatherMapComponent.vue').default);
+Vue.component('calendar-component', require('./components/CalendarComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -73,7 +73,7 @@
                         <a href="{{ route('login') }}">Se Connecter</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">S'enregister</a>
+                            <a href="{{ route('register') }}">S'enregistrer</a>
                         @endif
                     @endauth
                 </div>
@@ -83,7 +83,7 @@
 
                 <div class="anim">
                     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-                    <lottie-player src="../animation/lf30_editor_5KYs8e.json"  background="transparent"  speed="1"  style="width: 100%; height: 200px;"  loop  autoplay></lottie-player>
+                    <lottie-player src="../animation/lf30_editor_5KYs8e.json"  background="transparent"  speed="0.7"  style="width: 100%; height: 200px;"  loop  autoplay></lottie-player>
                 </div>
                 
                 <div class="title m-b-md">

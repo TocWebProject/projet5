@@ -25,6 +25,9 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
+        "@fullcalendar/daygrid": "^5.2.0",
+        "@fullcalendar/interaction": "^5.2.0",
+        "@fullcalendar/vue": "^5.2.0",
         "laravel-vue-pagination": "^2.3.1"
     }
 }
