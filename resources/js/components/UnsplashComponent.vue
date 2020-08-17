@@ -21,6 +21,9 @@
             </div>
         </div>
         <br />
+        <div class="alert alert-dark no-result text-center mt-3" v-show="noResult">
+            Aucune image ne correspond à votre recherche
+        </div>
         <div class="unsplash-img">
             <div v-for="(image, i) in images" :key="i" >
                 <div class="gallery-container">
@@ -43,6 +46,7 @@
     export default {
 
         data: () => ({
+            noResult: false,
             images: [],
             unsplashQuery: localStorage.unsplashQuery,
         }),
@@ -63,11 +67,14 @@
                 }
                     )
                 .then(response => {
-                this.images = response.data.results;
-                })
-                .catch(() => {
-                this.images = [];
-                });
+                    this.images = response.data.results;
+                    if(!this.images.length){
+                        this.noResult = true
+                    }else{
+                        this.noResult = false
+                    }
+                    })
+                .catch(error => console.log(error));
             },
 
             onEnter: function(){
@@ -88,7 +95,10 @@
         },
 
         beforeMount(){
-            this.searchUnsplash(this.unsplashQuery)
+            this.noResult = false
+            if (this.unsplashQuery){
+                this.searchUnsplash(this.unsplashQuery)
+            } 
          },
 
     

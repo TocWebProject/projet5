@@ -30,7 +30,7 @@
                             v-on:keyup.enter="fetchWeather"
                             type="text"
                             class="form-control" 
-                            placeholder="Votre ville"
+                            placeholder="Votre Ville"
                             aria-label="Recipient's search weather"
                             /> 
                             <div class="input-group-append">
@@ -38,6 +38,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="alert alert-dark no-result text-center mt-3" v-show="noCity">
+                    Ville Inconnue
                 </div>
             </div>
         </div>
@@ -50,7 +53,8 @@ export default {
     data() {
         
         return {
-        
+            
+            noCity: false,
             api_key: '9acc0fa70a651d74c716faca6c3bc992',
             url_base: 'https://api.openweathermap.org/data/2.5/',
             cityQuery: localStorage.cityQuery,
@@ -64,10 +68,15 @@ export default {
     methods:{
         fetchWeather () {
             
-                fetch(`${this.url_base}weather?q=${this.cityQuery}&units=metric&APPID=${this.api_key}&lang=fr`)
-                .then(response => {
+            fetch(`${this.url_base}weather?q=${this.cityQuery}&units=metric&APPID=${this.api_key}&lang=fr`)
+            .then(response => {
+                if (!response.ok) {
+                    this.noCity = true
+                }else{
+                    this.noCity = false
+                }
                     return response.json();
-                }).then(this.setResults);
+            }).then(this.setResults);
             
         },
         setResults(results) {
@@ -98,7 +107,9 @@ export default {
     },
 
     beforeMount(){
+        if (this.cityQuery){
         this.fetchWeather(this.cityQuery);
+        }
     },
 }
 
