@@ -39,7 +39,7 @@
         },
 
         created(){
-            axios.get('http://journal-de-bord.test/todo')
+            axios.get('/todo')
                 //promesse attend les data de la bdd
                 // .response(response => console.log(response))
                 .then(response => this.tasks = response.data)
@@ -49,32 +49,32 @@
         methods: {
             // Our method to GET results from a Laravel endpoint
             getResults(page = 1) {
-                axios.get('http://journal-de-bord.test/todo?page=' + page)
+                axios.get('/todo?page=' + page)
                     .then(response => {
                     this.tasks = response.data;
                 });
             },
 
             getTask(id){
-                axios.get('http://journal-de-bord.test/tasks/modify/' + id)
+                axios.get('/tasks/modify/' + id)
                     //.then(response => console.log(response.data))
                     .then(response => this.taskToEdit = response.data)
                     .catch(error => console.log(error));
             },
 
             deleteTask(id){
-                axios.delete('http://journal-de-bord.test/tasks/' + id)
+                axios.delete('/tasks/' + id)
                     .then(response => this.tasks = response.data)
                     .catch(error => console.log(error));
             },
 
             searchTask(){
                 if(this.searchQ.length > 2 ){
-                  axios.get('http://journal-de-bord.test/todo/' + this.searchQ)
+                  axios.get('/todo/' + this.searchQ)
                     .then(response => this.tasks = response.data)  
                     .catch(error => console.log(error));
                 }else{
-                    axios.get('http://journal-de-bord.test/todo')
+                    axios.get('/todo')
                         //promesse attend les data de la bdd
                         // .response(response => console.log(response))
                         .then(response => this.tasks = response.data)

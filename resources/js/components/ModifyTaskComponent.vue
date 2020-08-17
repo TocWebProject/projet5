@@ -35,7 +35,7 @@ export default {
 
     methods: {
         update(){
-            axios.patch('http://journal-de-bord.test/tasks/modify/' + this.taskToEdit.id, {
+            axios.patch('/tasks/modify/' + this.taskToEdit.id, {
                 name: this.taskToEdit.name
             })
             .then(response => this.$emit('task-updated', response))

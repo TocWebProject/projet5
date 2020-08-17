@@ -21,7 +21,7 @@
                         <form>
                             <div class="form-group">
                                 <label for="">Nom de la tâche</label>
-                                <textarea name="name" id="name" row="4" class="form-control" v-model="name"></textarea>
+                                <textarea name="addName" id="addName" row="4" class="form-control" v-model="name"></textarea>
                             </div>
                         </form>    
                     </div>
@@ -49,7 +49,7 @@ export default {
     methods: {
 
         taskStore() {
-            axios.post('http://journal-de-bord.test/todo', {
+            axios.post('/todo', {
                 name: this.name
             })
             //.then(response => console.log(response))
