@@ -21798,7 +21798,7 @@ __webpack_require__.r(__webpack_exports__);
     taskStore: function taskStore() {
       var _this = this;
 
-      axios.post('http://journal-de-bord.test/todo', {
+      axios.post('/todo', {
         name: this.name
       }) //.then(response => console.log(response))
       .then(function (response) {
@@ -21901,7 +21901,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this = this;
 
-      axios.patch('http://journal-de-bord.test/tasks/modify/' + this.taskToEdit.id, {
+      axios.patch('/tasks/modify/' + this.taskToEdit.id, {
         name: this.taskToEdit.name
       }).then(function (response) {
         return _this.$emit('task-updated', response);
@@ -21969,10 +21969,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'weather',
   data: function data() {
     return {
+      noCity: false,
       api_key: '9acc0fa70a651d74c716faca6c3bc992',
       url_base: 'https://api.openweathermap.org/data/2.5/',
       cityQuery: localStorage.cityQuery,
@@ -21981,7 +21985,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     fetchWeather: function fetchWeather() {
+      var _this = this;
+
       fetch("".concat(this.url_base, "weather?q=").concat(this.cityQuery, "&units=metric&APPID=").concat(this.api_key, "&lang=fr")).then(function (response) {
+        if (!response.ok) {
+          _this.noCity = true;
+        } else {
+          _this.noCity = false;
+        }
+
         return response.json();
       }).then(this.setResults);
     },
@@ -22010,7 +22022,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    this.fetchWeather(this.cityQuery);
+    if (this.cityQuery) {
+      this.fetchWeather(this.cityQuery);
+    }
   }
 });
 
@@ -22066,7 +22080,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('http://journal-de-bord.test/todo') //promesse attend les data de la bdd
+    axios.get('/todo') //promesse attend les data de la bdd
     // .response(response => console.log(response))
     .then(function (response) {
       return _this.tasks = response.data;
@@ -22080,14 +22094,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('http://journal-de-bord.test/todo?page=' + page).then(function (response) {
+      axios.get('/todo?page=' + page).then(function (response) {
         _this2.tasks = response.data;
       });
     },
     getTask: function getTask(id) {
       var _this3 = this;
 
-      axios.get('http://journal-de-bord.test/tasks/modify/' + id) //.then(response => console.log(response.data))
+      axios.get('/tasks/modify/' + id) //.then(response => console.log(response.data))
       .then(function (response) {
         return _this3.taskToEdit = response.data;
       })["catch"](function (error) {
@@ -22097,7 +22111,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteTask: function deleteTask(id) {
       var _this4 = this;
 
-      axios["delete"]('http://journal-de-bord.test/tasks/' + id).then(function (response) {
+      axios["delete"]('/tasks/' + id).then(function (response) {
         return _this4.tasks = response.data;
       })["catch"](function (error) {
         return console.log(error);
@@ -22107,13 +22121,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       if (this.searchQ.length > 2) {
-        axios.get('http://journal-de-bord.test/todo/' + this.searchQ).then(function (response) {
+        axios.get('/todo/' + this.searchQ).then(function (response) {
           return _this5.tasks = response.data;
         })["catch"](function (error) {
           return console.log(error);
         });
       } else {
-        axios.get('http://journal-de-bord.test/todo') //promesse attend les data de la bdd
+        axios.get('/todo') //promesse attend les data de la bdd
         // .response(response => console.log(response))
         .then(function (response) {
           return _this5.tasks = response.data;
@@ -22182,9 +22196,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      noResult: false,
       images: [],
       unsplashQuery: localStorage.unsplashQuery
     };
@@ -22201,8 +22219,14 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         _this.images = response.data.results;
-      })["catch"](function () {
-        _this.images = [];
+
+        if (!_this.images.length) {
+          _this.noResult = true;
+        } else {
+          _this.noResult = false;
+        }
+      })["catch"](function (error) {
+        return console.log(error);
       });
     },
     onEnter: function onEnter() {
@@ -22220,7 +22244,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    this.searchUnsplash(this.unsplashQuery);
+    this.noResult = false;
+
+    if (this.unsplashQuery) {
+      this.searchUnsplash(this.unsplashQuery);
+    }
   }
 });
 
@@ -59162,7 +59190,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { name: "name", id: "name", row: "4" },
+                      attrs: { name: "addName", id: "addName", row: "4" },
                       domProps: { value: _vm.name },
                       on: {
                         input: function($event) {
@@ -59507,7 +59535,7 @@ var render = function() {
                   staticClass: "form-control",
                   attrs: {
                     type: "text",
-                    placeholder: "Votre ville",
+                    placeholder: "Votre Ville",
                     "aria-label": "Recipient's search weather"
                   },
                   domProps: { value: _vm.cityQuery },
@@ -59548,6 +59576,22 @@ var render = function() {
               ])
             ])
           ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.noCity,
+                expression: "noCity"
+              }
+            ],
+            staticClass: "alert alert-dark no-result text-center mt-3"
+          },
+          [_vm._v("\n                Ville Inconnue\n            ")]
         )
       ])
     ])
@@ -59780,6 +59824,22 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("br"),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.noResult,
+            expression: "noResult"
+          }
+        ],
+        staticClass: "alert alert-dark no-result text-center mt-3"
+      },
+      [_vm._v("\n        Aucune image ne correspond à votre recherche\n    ")]
+    ),
     _vm._v(" "),
     _c(
       "div",
