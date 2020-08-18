@@ -43,6 +43,11 @@
                 top: 18px;
             }
 
+            .bottom{
+                position: absolute;
+                bottom: 10px
+            }
+
             .content {
                 text-align: center;
             }
@@ -97,6 +102,11 @@
                         Concentrer vous sur l'essentiel et avancer dans vos tâches tout en restant informé !
                     </h2>
                 </div>
+            </div>
+            <div class="bottom links">
+                <p class="flex-center">© 2020 TocWebProject</p>
+                <a href="#">RGPD</a>
+                <a href="#">Mentions légales</a>
             </div>
         </div>
     </body>
