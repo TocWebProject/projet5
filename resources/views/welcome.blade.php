@@ -94,7 +94,7 @@
                 </div>
                 <div class="links">
                     <h2>
-                        Concentrer vous sur l'essentiel tout en restant informer et avancez dans vos tâches
+                        Concentrer vous sur l'essentiel et avancer dans vos tâches tout en restant informé !
                     </h2>
                 </div>
             </div>
