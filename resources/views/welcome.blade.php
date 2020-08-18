@@ -12,6 +12,9 @@
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
+        <!-- Lottie Animation Script -->
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
         <!-- Styles -->
         <style>
             html, body {
@@ -67,7 +70,15 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-bottom: 5px;
+            }
+
+            .copyright{
+                margin: 5px 0px;
+            }
+
+            h2{
+                margin-top: 0px;
             }
         </style>
     </head>
@@ -90,7 +101,6 @@
             <div class="content">
 
                 <div class="anim">
-                    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
                     <lottie-player src="../animation/lf30_editor_5KYs8e.json"  background="transparent"  speed="0.7"  style="width: 100%; height: 200px;"  loop  autoplay></lottie-player>
                 </div>
                 
@@ -104,7 +114,7 @@
                 </div>
             </div>
             <div class="bottom links">
-                <p class="flex-center">© 2020 TocWebProject</p>
+                <p class="copyright flex-center">© 2020 TocWebProject</p>
                 <a href="#">RGPD</a>
                 <a href="#">Mentions légales</a>
             </div>
