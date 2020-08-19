@@ -81,7 +81,7 @@
             h2{
                 margin-top: 0px;
             }
-
+            
             @media (max-width: 1060px) {
                 h2{
                     font-size: 18px;
@@ -91,11 +91,18 @@
                 }
 
             }
+
             @media (max-width: 545px) {
                 .bottom{
                     bottom: 60px;
                 }
-            }
+            } 
+
+            @media (max-height: 472px) {
+                h2{
+                    display: none;
+                }
+            }    
         </style>
     </head>
     <body>
