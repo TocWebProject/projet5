@@ -25,7 +25,7 @@
         <div class="col-md-4">
             <div class="card mb-3">
                 <div class="card-header">Tâches</div>
-                <div class="card-body align-middle text-center"> Vous avez 34 000 Tâches à effectuer</div>
+                <div class="card-body align-middle text-center">Courage ! Vous avez {{ $numberOfTasks }} tâches à effectuer !</div>
             </div>
         </div>
         <div class="col-md-4">

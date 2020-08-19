@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Tasks;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -22,12 +24,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        if (auth()->user()->is_admin == 1) {
-            return view('admin.adminHome');;
-        }else{
-            return view('home');;
-        }
+    {   
+        $id = Auth::id();
+        $numberOfTasks = Tasks::where('user_id', $id)->count();
+
+        return view('home')->with('numberOfTasks', $numberOfTasks);   
     }
 
     /**
@@ -37,6 +38,9 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('admin.adminHome');
+        $id = Auth::id();
+        $numberOfTasks = Tasks::where('user_id', $id)->count();
+
+        return view('admin.adminHome')->with('numberOfTasks', $numberOfTasks);
     }
 }
