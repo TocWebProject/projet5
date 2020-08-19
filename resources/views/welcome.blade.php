@@ -16,6 +16,7 @@
         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
         <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
             html, body {
                 background-color: #fff;
@@ -48,7 +49,7 @@
 
             .bottom{
                 position: absolute;
-                bottom: 10px
+                bottom: 35px
             }
 
             .content {
@@ -56,7 +57,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 66px;
             }
 
             .links > a {
@@ -70,7 +71,7 @@
             }
 
             .m-b-md {
-                margin-bottom: 5px;
+                margin-bottom: 20px;
             }
 
             .copyright{
@@ -79,6 +80,21 @@
 
             h2{
                 margin-top: 0px;
+            }
+
+            @media (max-width: 1060px) {
+                h2{
+                    font-size: 18px;
+                }
+                .title{
+                    font-size: 50px;
+                }
+
+            }
+            @media (max-width: 545px) {
+                .bottom{
+                    bottom: 60px;
+                }
             }
         </style>
     </head>
@@ -115,9 +131,12 @@
             </div>
             <div class="bottom links">
                 <p class="copyright flex-center">© 2020 TocWebProject</p>
-                <a href="#">RGPD</a>
-                <a href="#">Mentions légales</a>
+                <div class="links flex-center">
+                    <a href="#">RGPD</a>
+                    <a href="#">Mentions légales</a>
+                </div>
             </div>
+            @include('cookieConsent::index')
         </div>
     </body>
 </html>
