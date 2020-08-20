@@ -5,16 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are normal user - You are logged in!
+                <div class="card-header">Tâches</div>
+                <div class="card-body align-middle text-center">   
+                    Courage ! Vous avez {{ $numberOfTasks }} tâches à effectuer !
                 </div>
             </div>
         </div>
@@ -22,18 +15,7 @@
 </div>
 <div class="container mt-3">
     <div class="row justify-content-between">
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header">Tâches</div>
-                <div class="card-body align-middle text-center">Courage ! Vous avez {{ $numberOfTasks }} tâches à effectuer !</div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header">Les Nouvelles du monde</div>
-                <div class="card-body align-middle text-center"> Notre maison brûle</div>
-            </div>
-        </div>
+        <news-api></news-api>
         <openweathermap-api></openweathermap-api>
     </div>
     <unsplash-api></unsplash-api>

@@ -75,7 +75,7 @@
             }
 
             .copyright{
-                margin: 5px 0px;
+                margin: 0px;
             }
 
             h2{
@@ -87,7 +87,7 @@
                     font-size: 18px;
                 }
                 .title{
-                    font-size: 50px;
+                    font-size: 48px;
                 }
 
             }
@@ -98,8 +98,20 @@
                 }
             } 
 
+            @media (max-width: 280px) {
+                .bottom{
+                    display: none;
+                }
+            } 
+
             @media (max-height: 472px) {
                 h2{
+                    display: none;
+                }
+            }    
+
+            @media (max-height: 360px) {
+                .bottom{
                     display: none;
                 }
             }    
