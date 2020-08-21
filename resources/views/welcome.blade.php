@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <!-- Primary Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <!-- Page Title -->
         <title>JournalDeBord</title>
+
+        <!-- Canonical & Favicon -->	
+        <link rel="canonical" href="https://tocwebproject.fr">
+        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
+        <!-- Secondary Meta -->
+        <meta name="description" content="Journal de bord, l'application qui vous aides à vos organiser dans vos tâches tout en ayant 
+        accès à une citation par jour, votre météo et des images incroyables">
+        <meta name="author"      content="TocWebProject">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Favicon -->
-        <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -141,7 +149,7 @@
                 </div>
                 <div class="links">
                     <h2>
-                        Concentrer vous sur l'essentiel et avancer dans vos tâches tout en restant informé !
+                        Concentrer vous sur l'essentiel et avancer dans vos tâches !
                     </h2>
                 </div>
             </div>

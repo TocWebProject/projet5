@@ -33,7 +33,7 @@ class HomeController extends Controller
         } elseif ($numberOfTasks === 1) {
             $sentenceToTransmit = "vous avez une seule tâche à effectuer ! Penser à vos prochaines tâches...";
         } elseif ($numberOfTasks > 1) {
-            $sentenceToTransmit = "vous avez $numberOfTasks à effectuer ! Courage !";
+            $sentenceToTransmit = "vous avez $numberOfTasks tâches à effectuer ! Courage !";
         }
 
         return view('home')->with('sentenceToTransmit', $sentenceToTransmit);   
@@ -54,7 +54,7 @@ class HomeController extends Controller
         } elseif ($numberOfTasks === 1) {
             $sentenceToTransmit = "vous avez une seule tâche à effectuer ! Penser à vos prochaines tâches...";
         } elseif ($numberOfTasks > 1) {
-            $sentenceToTransmit = "vous avez $numberOfTasks à effectuer ! Courage !";
+            $sentenceToTransmit = "vous avez $numberOfTasks tâches à effectuer ! Courage !";
         }
 
         return view('admin.adminHome')->with('sentenceToTransmit', $sentenceToTransmit);
