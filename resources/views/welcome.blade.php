@@ -12,9 +12,6 @@
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
-        <!-- Lottie Animation Script -->
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
@@ -157,5 +154,7 @@
             </div>
             @include('cookieConsent::index')
         </div>
+        <!-- Lottie Animation Script -->
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     </body>
 </html>

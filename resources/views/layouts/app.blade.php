@@ -22,8 +22,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
 
-    <!-- Lottie Animation Script -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
     <div id="app">
@@ -103,5 +101,12 @@
         </main>
         @include('footer')
     </div>
+    <!-- Quote of the Day with Ouest France Script -->
+    <script>
+        var type="day";
+    </script>
+    <script src="https://citations.ouest-france.fr/js/web/export.js?v3"></script>
+    <!-- Lottie Animation Script -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </body>
 </html>
