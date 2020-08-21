@@ -27,8 +27,16 @@ class HomeController extends Controller
     {   
         $id = Auth::id();
         $numberOfTasks = Tasks::where('user_id', $id)->count();
+        
+        if ($numberOfTasks === 0) {
+            $sentenceToTransmit = "vous n'avez aucune tâche à effectuer ! Vraiment ? Ajouter vos prochaines tâches...";
+        } elseif ($numberOfTasks === 1) {
+            $sentenceToTransmit = "vous avez une seule tâche à effectuer ! Penser à vos prochaines tâches...";
+        } elseif ($numberOfTasks > 1) {
+            $sentenceToTransmit = "vous avez $numberOfTasks à effectuer ! Courage !";
+        }
 
-        return view('home')->with('numberOfTasks', $numberOfTasks);   
+        return view('home')->with('sentenceToTransmit', $sentenceToTransmit);   
     }
 
     /**
@@ -41,6 +49,14 @@ class HomeController extends Controller
         $id = Auth::id();
         $numberOfTasks = Tasks::where('user_id', $id)->count();
 
-        return view('admin.adminHome')->with('numberOfTasks', $numberOfTasks);
+        if ($numberOfTasks === 0) {
+            $sentenceToTransmit = "vous n'avez aucune tâche à effectuer ! Vraiment ? Ajouter vos prochaines tâches...";
+        } elseif ($numberOfTasks === 1) {
+            $sentenceToTransmit = "vous avez une seule tâche à effectuer ! Penser à vos prochaines tâches...";
+        } elseif ($numberOfTasks > 1) {
+            $sentenceToTransmit = "vous avez $numberOfTasks à effectuer ! Courage !";
+        }
+
+        return view('admin.adminHome')->with('sentenceToTransmit', $sentenceToTransmit);
     }
 }
