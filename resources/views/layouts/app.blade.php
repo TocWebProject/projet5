@@ -100,6 +100,7 @@
             </div>
         </main>
         @include('footer')
+        <div id="QuoteOFDay" style="display: none;"></div>
     </div>
     <!-- Quote of the Day with Ouest France Script -->
     <script>
