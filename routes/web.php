@@ -18,7 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// AUTHENTICATION 
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// REGISTRATION
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
 
 // HOME
 Route::get('/home', 'HomeController@index')->name('home');
