@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tasks;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application homepage for normal User.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -40,13 +41,15 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application homepage for Admin.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function adminHome()
     {
         $id = Auth::id();
+
+        // Number of Tasks for admin
         $numberOfTasks = Tasks::where('user_id', $id)->count();
 
         if ($numberOfTasks === 0) {
@@ -57,6 +60,10 @@ class HomeController extends Controller
             $sentenceToTransmit = "vous avez $numberOfTasks tâches à effectuer ! Courage !";
         }
 
-        return view('admin.adminHome')->with('sentenceToTransmit', $sentenceToTransmit);
+        // Number of Users in this app. 
+        $numberOfUsers = User::count();
+        
+        return view('admin.adminHome')->with('sentenceToTransmit', $sentenceToTransmit)->with('numberOfUsers', $numberOfUsers);
+        
     }
 }

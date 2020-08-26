@@ -21,7 +21,7 @@
                     Citation du Jour
                 </div>
                 <div class="card-body quote-body text-center">
-                <div id="QuoteOFDay" class="mt-5"></div>
+                    <div id="QuoteOFDay" class="mt-5"></div>
                 </div>
             </div>
         </div>

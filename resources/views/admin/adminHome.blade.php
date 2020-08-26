@@ -7,7 +7,8 @@
             <div class="card">
                 <div class="card-header">Tâches</div>
                 <div class="card-body align-middle text-center mt-3 mb-3">   
-                    Bonjour {{ Auth::user()->name }}, {{ $sentenceToTransmit}}
+                    Bonjour {{ Auth::user()->name }}, Vous avez {{ $numberOfUsers }} utilisateurs inscrits sur votre application et {{ $sentenceToTransmit }}
+                    
                 </div>
             </div>
         </div>
