@@ -26,22 +26,30 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $id = Auth::id();
-        $numberOfTasks = Tasks::where('user_id', $id)->count();
-        
-        if ($numberOfTasks === 0) {
-            $sentenceToTransmit = "vous n'avez aucune tâche à effectuer ! Vraiment ? Ajouter vos prochaines tâches...";
-        } elseif ($numberOfTasks === 1) {
-            $sentenceToTransmit = "vous avez une seule tâche à effectuer ! Penser à vos prochaines tâches...";
-        } elseif ($numberOfTasks > 1) {
-            $sentenceToTransmit = "vous avez $numberOfTasks tâches à effectuer ! Courage !";
-        }
+        if (auth()->user()->is_admin === 1) {
 
-        return view('home')->with('sentenceToTransmit', $sentenceToTransmit);   
+            return $this->adminHome();
+
+        } else {
+            
+            // Number of Tasks for the User.
+            $id = Auth::id();
+            $numberOfTasks = Tasks::where('user_id', $id)->count();
+            
+            if ($numberOfTasks === 0) {
+                $sentenceToTransmit = "vous n'avez aucune tâche à effectuer ! Vraiment ? Ajouter vos prochaines tâches...";
+            } elseif ($numberOfTasks === 1) {
+                $sentenceToTransmit = "vous avez une seule tâche à effectuer ! Penser à vos prochaines tâches...";
+            } elseif ($numberOfTasks > 1) {
+                $sentenceToTransmit = "vous avez $numberOfTasks tâches à effectuer ! Courage !";
+            }
+            
+            return view('home')->with('sentenceToTransmit', $sentenceToTransmit);   
+        }
     }
 
     /**
-     * Show the application homepage for Admin.
+     * Show the application homepage for the Admin.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */

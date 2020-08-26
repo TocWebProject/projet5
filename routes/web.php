@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// WELCOME PAGE
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,7 +22,6 @@ Auth::routes();
 
 // HOME
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
 
 // TODO-LIST View.
 Route::get ('/todo-list',function () {
