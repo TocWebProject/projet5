@@ -1,5 +1,6 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap');
 
 // Variables
 @import 'variables';
@@ -45,10 +46,26 @@
     position:relative;
     top:1px;
 }
-    
-            
+              
 // Quote of the Day Style
-
 .quote-body{
     height: 301px;
+}
+
+.quote-body a{
+    color: rgb(3, 0, 43);
+}
+
+.quote-body a:first-child {
+    font-size: 1rem;
+}
+
+// Complementary Font
+.card-header{
+    font-family: 'Proza Libre', sans-serif;
+    font-size: 1rem;
+}
+
+.navbar, h3, .fc-toolbar-title, .title{
+    font-family: 'Proza Libre', sans-serif;
 }

@@ -66,6 +66,7 @@
             }
 
             .links > a {
+                font-family: 'Proza Libre', sans-serif;
                 color: #636b6f;
                 padding: 0 25px;
                 font-size: 13px;

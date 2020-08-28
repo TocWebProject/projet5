@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
@@ -10970,5 +10970,25 @@ a.text-dark:focus {
 
 .quote-body {
   height: 301px;
+}
+
+.quote-body a {
+  color: #03002b;
+}
+
+.quote-body a:first-child {
+  font-size: 1rem;
+}
+
+.card-header {
+  font-family: "Proza Libre", sans-serif;
+  font-size: 1rem;
+}
+
+.navbar,
+h3,
+.fc-toolbar-title,
+.title {
+  font-family: "Proza Libre", sans-serif;
 }
 
