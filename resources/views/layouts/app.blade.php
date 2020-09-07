@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
     <!-- Secondary Meta -->
-    <meta name="description" content="Journal de bord, l'application qui vous aides à vos organiser dans vos tâches tout en ayant 
+    <meta name="description" content="Journal de bord, l'application qui vous aides à vous organiser dans vos tâches tout en ayant 
     accès à une citation par jour, votre météo et des images incroyables">
     <meta name="author"      content="TocWebProject">
     
@@ -51,7 +51,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto d-flex align-items-center">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -63,24 +63,27 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
+                            <li class="nav-item h-100">
                                 <a class="nav-link" href="{{ url('/home') }}"><i class="fas fa-home mr-1"></i>Accueil</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item h-100">
                                 <a class="nav-link" href="{{ route('todo-list') }}"><i class="fas fa-list-ul mr-1"></i>Tâches</a> 
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item h-100">
                                 <a class="nav-link" href="{{ route('calendar') }}"><i class="fas fa-calendar-alt mr-1"></i>Calendrier</a> 
                             </li>
                         @can('manage-users')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fa fa-users mr-1" aria-hidden="true"></i>Liste des utilisateurs</a> 
+                            <li class="nav-item h-100">
+                                <a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fa fa-users mr-1" aria-hidden="true"></i>Utilisateurs</a> 
                             </li>
                         @endcan
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown h-100">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    @if(Auth::user()->avatar)
+                                    <img class="img-fluid rounded" src="{{ asset('/storage/images/'.Auth::user()->avatar) }}" alt="Avatar" width="45"/>
+                                    @endif
+                                    {{ Auth::user()->name }} 
+                                    <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

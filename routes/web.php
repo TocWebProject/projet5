@@ -30,6 +30,11 @@ Route::post('register', 'Auth\RegisterController@register');
 // HOME
 Route::get('/home', 'HomeController@index')->name('home');
 
+//AVATAR
+Route::get('/avatar', 'HomeController@index');
+Route::post('/avatar', 'HomeController@uploadAvatar');
+
+
 // TODO-LIST View.
 Route::get ('/todo-list',function () {
     return view('todo');
@@ -50,4 +55,4 @@ Route::get ('/calendar',function () {
 // CRUD Users for Admin
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('is_admin')->group(function() {
     Route::resource('users', 'UsersController');
-}); 
+});  
