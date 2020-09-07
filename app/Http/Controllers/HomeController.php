@@ -6,6 +6,7 @@ use App\Tasks;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -73,5 +74,41 @@ class HomeController extends Controller
         
         return view('admin.adminHome')->with('sentenceToTransmit', $sentenceToTransmit)->with('numberOfUsers', $numberOfUsers);
         
+    }
+
+    // Uploading an Avatar for User
+    public function uploadAvatar (Request $request)
+    {
+        // is there a file ?
+        if($request->hasFile('image')){
+            
+            // Condition
+            $validated = $request->validate([
+                'image' => 'required|mimes:jpg,jpeg,png|max:2048',
+            ]);
+
+            // If the file is valid, we can store the image.
+            if ($request->file('image')->isValid()) {
+
+                $filename = $request->image->getClientOriginalName();
+
+                // Delete old Image Avatar
+                $imageStored = auth()->user()->avatar;
+                if($imageStored){
+                    Storage::delete('/public/images/' . $imageStored);
+                }
+
+                //Store the image
+                $request->image->storeAs('images', $filename, 'public');
+                auth()->user()->update(['avatar' => $filename]);  
+
+                $request->session()->flash('success', "Bravo, vous avez ajouté votre avatar.");
+ 
+                return redirect()->back();
+            }
+        } else {
+            $request->session()->flash('error', 'Une erreur est survenue lors de la mise à jour de votre avatar, avez-vous selectionné un fichier ?');
+            return redirect()->back();
+        }
     }
 }

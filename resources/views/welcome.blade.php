@@ -13,7 +13,7 @@
         <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
         <!-- Secondary Meta -->
-        <meta name="description" content="Journal de bord, l'application qui vous aides à vos organiser dans vos tâches tout en ayant 
+        <meta name="description" content="Journal de bord, l'application qui vous aides à vous organiser dans vos tâches tout en ayant 
         accès à une citation par jour, votre météo et des images incroyables">
         <meta name="author"      content="TocWebProject">
 
