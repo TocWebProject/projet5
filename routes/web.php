@@ -47,7 +47,7 @@ Route::get('/tasks/modify/{id}', 'TasksController@edit');
 Route::patch('/tasks/modify/{id}', 'TasksController@update');
 Route::delete('/tasks/{id}', 'TasksController@destroy');
 
-// Calendar View & Request
+// Calendar View 
 Route::get ('/calendar',function () {
     return view('calendar');
 })->name('calendar')->middleware('auth');
