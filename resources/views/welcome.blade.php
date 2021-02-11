@@ -161,8 +161,8 @@
                     <a href="#">Mentions légales</a>
                 </div>
             </div>
-            @include('cookieConsent::index')
         </div>
+        @include('cookieConsent::index')
         <!-- Lottie Animation Script -->
         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     </body>
